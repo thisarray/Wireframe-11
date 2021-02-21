@@ -173,13 +173,13 @@ def on_mouse_move(pos):
 <script>
 WIDTH = 600;
 HEIGHT = 800;
-BALL_SIZE = 10;
-MARGIN = 50;
+const BALL_SIZE = 10;
+const MARGIN = 50;
 
-BRICKS_X = 10;
-BRICKS_Y = 5;
-BRICK_W = Math.floor((WIDTH - (2 * MARGIN)) / BRICKS_X);
-BRICK_H = 25;
+const BRICKS_X = 10;
+const BRICKS_Y = 5;
+const BRICK_W = Math.floor((WIDTH - (2 * MARGIN)) / BRICKS_X);
+const BRICK_H = 25;
 
 var ball, bat, bricks;
 
@@ -303,12 +303,7 @@ function update_step(dt) {
   if (ball.colliderect(bat)) {
     vy = -Math.abs(vy);
     // randomise the x velocity but keep the sign
-    if (vx < 0) {
-      vx = -Math.abs(value);
-    }
-    else {
-      vx = Math.abs(value);
-    }
+    vx = (vx < 0) ? -Math.abs(value) : Math.abs(value);
   }
   else {
     // Find first collision
@@ -320,10 +315,10 @@ function update_step(dt) {
       dx = (ball.centerx - brick.centerx) / BRICK_W;
       dy = (ball.centery - brick.centery) / BRICK_H;
       if (Math.abs(dx) > Math.abs(dy)) {
-        vx = (dx < 0) ? -Math.abs(vx): Math.abs(vx);
+        vx = (dx < 0) ? -Math.abs(vx) : Math.abs(vx);
       }
       else {
-        vy = (dy < 0) ? -Math.abs(vy): Math.abs(vy);
+        vy = (dy < 0) ? -Math.abs(vy) : Math.abs(vy);
       }
       bricks.splice(idx, 1);
     }
